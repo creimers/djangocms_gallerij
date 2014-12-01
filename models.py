@@ -11,6 +11,12 @@ class Gallery(models.Model):
 
     name = models.CharField(max_length=50)
 
+    def copy_relations(self, oldinstance):
+        for image in oldinstance.images.all():
+            image.pk = None
+            image.social_list = self
+            image.save()
+
     def __unicode__(self):
         return u'%s' % self.name
 
@@ -45,11 +51,6 @@ class Image(Sortable):
 class GalleryPluginModel(CMSPlugin):
     gallery = models.ForeignKey(Gallery)
 
-    def copy_relations(self, oldinstance):
-        for image in oldinstance.images.all():
-            image.pk = None
-            image.social_list = self
-            image.save()
 
     def __unicode__(self):
         return u'%s' % self.gallery.name
