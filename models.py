@@ -1,4 +1,6 @@
 from django.db import models
+from cms.models import CMSPlugin
+
 from adminsortable.models import Sortable
 from adminsortable.fields import SortableForeignKey
 
@@ -38,3 +40,10 @@ class Image(Sortable):
             return u'%s' % self.caption_text
         else:
             return u'%s' % self.image.label
+
+
+class GalleryPlugin(CMSPlugin):
+    gallery = models.ForeignKey(Gallery)
+
+    def __unicode__(self):
+        return u'%s' % self.gallery.name
