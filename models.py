@@ -42,7 +42,7 @@ class Image(Sortable):
             return u'%s' % self.image.label
 
 
-class GalleryPlugin(CMSPlugin):
+class GalleryPluginModel(CMSPlugin):
     gallery = models.ForeignKey(Gallery)
 
     def __unicode__(self):
