@@ -1,1 +1,13 @@
-Hello I am gallerij
+{% load i18n thumbnail sekizai_tags %}
+
+<h1>{{ gallery }}</h1>
+<ul>
+{% for image in images %}
+	<li>
+		{{image.pk}}	
+		{{image.image}}	
+		<img src="{% thumbnail image.image 320x320 crop="scale" upscale="True" %}" alt="{{ image.label }}">
+	</li>
+{% endfor %}
+</ul>
+
