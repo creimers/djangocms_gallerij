@@ -25,6 +25,13 @@ class Migration(SchemaMigration):
         ))
         db.send_create_signal(u'djangocms_gallerij', ['Image'])
 
+        # Adding model 'GalleryPluginModel'
+        db.create_table(u'djangocms_gallerij_gallerypluginmodel', (
+            (u'cmsplugin_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['cms.CMSPlugin'], unique=True, primary_key=True)),
+            ('gallery', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['djangocms_gallerij.Gallery'])),
+        ))
+        db.send_create_signal(u'djangocms_gallerij', ['GalleryPluginModel'])
+
 
     def backwards(self, orm):
         # Deleting model 'Gallery'
@@ -32,6 +39,9 @@ class Migration(SchemaMigration):
 
         # Deleting model 'Image'
         db.delete_table(u'djangocms_gallerij_image')
+
+        # Deleting model 'GalleryPluginModel'
+        db.delete_table(u'djangocms_gallerij_gallerypluginmodel')
 
 
     models = {
@@ -64,6 +74,27 @@ class Migration(SchemaMigration):
             'user_permissions': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'related_name': "u'user_set'", 'blank': 'True', 'to': u"orm['auth.Permission']"}),
             'username': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '30'})
         },
+        'cms.cmsplugin': {
+            'Meta': {'object_name': 'CMSPlugin'},
+            'changed_date': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
+            'creation_date': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'language': ('django.db.models.fields.CharField', [], {'max_length': '15', 'db_index': 'True'}),
+            'level': ('django.db.models.fields.PositiveIntegerField', [], {'db_index': 'True'}),
+            'lft': ('django.db.models.fields.PositiveIntegerField', [], {'db_index': 'True'}),
+            'parent': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['cms.CMSPlugin']", 'null': 'True', 'blank': 'True'}),
+            'placeholder': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['cms.Placeholder']", 'null': 'True'}),
+            'plugin_type': ('django.db.models.fields.CharField', [], {'max_length': '50', 'db_index': 'True'}),
+            'position': ('django.db.models.fields.PositiveSmallIntegerField', [], {'null': 'True', 'blank': 'True'}),
+            'rght': ('django.db.models.fields.PositiveIntegerField', [], {'db_index': 'True'}),
+            'tree_id': ('django.db.models.fields.PositiveIntegerField', [], {'db_index': 'True'})
+        },
+        'cms.placeholder': {
+            'Meta': {'object_name': 'Placeholder'},
+            'default_width': ('django.db.models.fields.PositiveSmallIntegerField', [], {'null': 'True'}),
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'slot': ('django.db.models.fields.CharField', [], {'max_length': '255', 'db_index': 'True'})
+        },
         u'contenttypes.contenttype': {
             'Meta': {'ordering': "('name',)", 'unique_together': "(('app_label', 'model'),)", 'object_name': 'ContentType', 'db_table': "'django_content_type'"},
             'app_label': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
@@ -75,6 +106,11 @@ class Migration(SchemaMigration):
             'Meta': {'object_name': 'Gallery'},
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '50'})
+        },
+        u'djangocms_gallerij.gallerypluginmodel': {
+            'Meta': {'object_name': 'GalleryPluginModel', '_ormbases': ['cms.CMSPlugin']},
+            u'cmsplugin_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['cms.CMSPlugin']", 'unique': 'True', 'primary_key': 'True'}),
+            'gallery': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['djangocms_gallerij.Gallery']"})
         },
         u'djangocms_gallerij.image': {
             'Meta': {'ordering': "['order']", 'object_name': 'Image'},
