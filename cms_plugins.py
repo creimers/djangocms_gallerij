@@ -15,9 +15,10 @@ class GalleryPlugin(CMSPluginBase):
     render_template = "djangocms_gallerij/_gallery.html"
 
     def render(self, context, instance, placeholder):
+        images = instance.gallery.images.all()
         context.update({
             'gallery': instance.gallery.name,
-            'images': instance.gallery.images.all()
+            'images': images
         })
 
         return context

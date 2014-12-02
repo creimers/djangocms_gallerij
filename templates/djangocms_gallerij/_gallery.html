@@ -4,7 +4,7 @@
 	{% for image in images %}
 	<div class="gallerij-item">
 		<a href="img/{{image.pk}}">
-			<img src="{% thumbnail image.image 320x320 crop="scale" upscale="True" %}" alt="{{ image.label }}">
+			<img src="{% thumbnail image.image 200x300 crop="True" upscale="True" %}" alt="{{ image.label }}">
 		</a>
 	</div>
 	{% endfor %}
