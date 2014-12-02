@@ -51,6 +51,5 @@ class Image(Sortable):
 class GalleryPluginModel(CMSPlugin):
     gallery = models.ForeignKey(Gallery)
 
-
     def __unicode__(self):
         return u'%s' % self.gallery.name
