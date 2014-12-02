@@ -13,7 +13,7 @@
 {% addtoblock "js" %}<script type="text/javascript">
 
 	objectFit.polyfill({
-		selector: 'img', // this can be any CSS selector
+		selector: '.landscape', // this can be any CSS selector
 		fittype: 'cover' // either contain, cover, fill or none
 
 	});
@@ -31,7 +31,11 @@
 <div class="image-slider full-height">
 	{% for image in image_list %}
 	<div class="single-image">
-		<img data-lazy="{% thumbnail image.image 2560x1280 crop="True" upscale="True" %}">
+		{% if image.image.width >= image.image.height%}
+			<img data-lazy="{% thumbnail image.image 2560x1280 crop="True" upscale="True" %}" class="landscape">
+		{% else %}
+			<img data-lazy="{% thumbnail image.image 900x1200 crop="True" upscale="True" %}" class="portrait">
+		{% endif %}
 	</div>
 	{% endfor %}
 </div>
