@@ -3,9 +3,21 @@
 
 {% block content %}
 
+{% addtoblock "css" %}<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}djangocms_gallerij/css/polyfill.object-fit.css"/>{% endaddtoblock "css" %}
 {% addtoblock "css" %}<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.3.15/slick.css"/>{% endaddtoblock "css" %}
+
 {% addtoblock "js" %}<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>{% endaddtoblock "js" %}
 {% addtoblock "js" %}<script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.3.15/slick.min.js"></script>{% endaddtoblock "js" %}
+
+{% addtoblock "js" %}<script src="{{ STATIC_URL }}djangocms_gallerij/js/polyfill.object-fit.min.js"></script>{% endaddtoblock "js" %}
+{% addtoblock "js" %}<script type="text/javascript">
+
+	objectFit.polyfill({
+		selector: 'img', // this can be any CSS selector
+		fittype: 'cover' // either contain, cover, fill or none
+
+	});
+</script>{% endaddtoblock "js" %}
 
 {% addtoblock "js" %}<script type="text/javascript">
 	$(document).ready(function(){
@@ -18,8 +30,8 @@
 
 <div class="image-slider full-height">
 	{% for image in image_list %}
-	<div class="single-image image-parent full-height">
-		<img data-lazy="{% thumbnail image.image 2560x1280 crop="True" upscale="True" %}" class="image-child">
+	<div class="single-image">
+		<img data-lazy="{% thumbnail image.image 2560x1280 crop="True" upscale="True" %}">
 	</div>
 	{% endfor %}
 </div>
