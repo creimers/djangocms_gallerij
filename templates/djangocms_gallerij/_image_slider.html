@@ -1,1 +1,27 @@
-{{ img_id }}
+{% extends CMS_TEMPLATE %}
+{% load cms_tags menu_tags sekizai_tags thumbnail%}
+
+{% block content %}
+
+{% addtoblock "css" %}<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.3.15/slick.css"/>{% endaddtoblock "css" %}
+{% addtoblock "js" %}<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>{% endaddtoblock "js" %}
+{% addtoblock "js" %}<script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.3.15/slick.min.js"></script>{% endaddtoblock "js" %}
+
+{% addtoblock "js" %}<script type="text/javascript">
+	$(document).ready(function(){
+		$('.image-slider').slick({
+			lazyLoad: 'ondemand',
+			initialSlide : {{start_slide}}
+		});
+	});
+</script>{% endaddtoblock "js" %}
+
+<div class="image-slider">
+	{% for image in image_list %}
+	<div class="single-image parent">
+		<img data-lazy="{% thumbnail image.image 500x500 crop="True" upscale="True" %}" class="img-responsive child">
+	</div>
+	{% endfor %}
+</div>
+
+{% endblock %}
