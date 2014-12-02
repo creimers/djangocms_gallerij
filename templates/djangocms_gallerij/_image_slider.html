@@ -16,10 +16,10 @@
 	});
 </script>{% endaddtoblock "js" %}
 
-<div class="image-slider">
+<div class="image-slider full-height">
 	{% for image in image_list %}
-	<div class="single-image parent">
-		<img data-lazy="{% thumbnail image.image 500x500 crop="True" upscale="True" %}" class="img-responsive child">
+	<div class="single-image image-parent full-height">
+		<img data-lazy="{% thumbnail image.image 2560x1280 crop="True" upscale="True" %}" class="image-child">
 	</div>
 	{% endfor %}
 </div>
