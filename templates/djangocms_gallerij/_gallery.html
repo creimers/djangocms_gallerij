@@ -1,12 +1,29 @@
 {% load i18n thumbnail sekizai_tags %}
 
-<ul>
-{% for image in images %}
-	<li>
+<div id="gallerij">
+	{% for image in images %}
+	<div class="gallerij-item">
 		<a href="img/{{image.pk}}">
 			<img src="{% thumbnail image.image 320x320 crop="scale" upscale="True" %}" alt="{{ image.label }}">
 		</a>
-	</li>
-{% endfor %}
-</ul>
+	</div>
+	{% endfor %}
+</div>
 
+{% addtoblock "js" %}<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>{% endaddtoblock "js" %}
+{% addtoblock "js" %}<script src="{{ STATIC_URL }}djangocms_gallerij/js/isotope.pkgd.js"></script>{% endaddtoblock "js" %}
+{% addtoblock "js" %}<script src="{{ STATIC_URL }}djangocms_gallerij/js/imagesloaded.pkgd.js"></script>{% endaddtoblock "js" %}
+{% addtoblock "js" %}<script>
+	$(document).ready(function(){
+
+		var $container = $('#gallerij').imagesLoaded( function() {
+			$container.isotope({
+				
+				// options
+				itemSelector: '.gallerij-item',
+				layoutMode: 'fitRows'
+
+			});
+		});
+	});
+</script>{% endaddtoblock "js" %}
