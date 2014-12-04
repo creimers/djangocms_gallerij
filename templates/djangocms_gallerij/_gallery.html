@@ -4,15 +4,19 @@
 	{% for image in images %}
 	<div class="gallerij-item">
 		<a href="img/{{image.pk}}">
-			<img src="{% thumbnail image.image 200x300 crop="True" upscale="True" %}" alt="{{ image.label }}">
+			{% if image.image.width >= image.image.height%}
+				<img src="{% thumbnail image.image 180x120 crop="True" upscale="True" %}" alt="{{ image.label }}">
+			{% else %}
+				<img src="{% thumbnail image.image 120x180 crop="True" upscale="True" %}" alt="{{ image.label }}">
+			{% endif %}
 		</a>
 	</div>
 	{% endfor %}
 </div>
 
-{% addtoblock "js" %}<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>{% endaddtoblock "js" %}
-{% addtoblock "js" %}<script src="{{ STATIC_URL }}djangocms_gallerij/js/isotope.pkgd.js"></script>{% endaddtoblock "js" %}
-{% addtoblock "js" %}<script src="{{ STATIC_URL }}djangocms_gallerij/js/imagesloaded.pkgd.js"></script>{% endaddtoblock "js" %}
+{% addtoblock "js" %}<script src="{{ STATIC_URL }}bower_components/jquery/dist/jquery.min.js"></script>{% endaddtoblock "js" %}
+{% addtoblock "js" %}<script src="{{ STATIC_URL }}bower_components/isotope/dist/isotope.pkgd.js"></script>{% endaddtoblock "js" %}
+{% addtoblock "js" %}<script src="{{ STATIC_URL }}bower_components/imagesloaded/imagesloaded.pkgd.js"></script>{% endaddtoblock "js" %}
 {% addtoblock "js" %}<script>
 	$(document).ready(function(){
 
