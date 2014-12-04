@@ -53,3 +53,13 @@ class GalleryPluginModel(CMSPlugin):
 
     def __unicode__(self):
         return u'%s' % self.gallery.name
+
+
+class StartImage(CMSPlugin):
+    image = FilerImageField(
+        null=True,
+        blank=False
+    )
+
+    def __unicode__(self):
+        return u'%s' % self.image.label

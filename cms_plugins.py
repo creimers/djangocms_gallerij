@@ -6,6 +6,7 @@ from cms.plugin_base import CMSPluginBase
 from django.utils.translation import ugettext as _
 
 from .models import GalleryPluginModel
+from .models import StartImage
 
 
 class GalleryPlugin(CMSPluginBase):
@@ -39,5 +40,21 @@ class StartSliderPlugin(CMSPluginBase):
 
         return context
 
+
+class StartImagePlugin(CMSPluginBase):
+
+    model = StartImage
+    name = _("Start Bild")
+    render_template = "djangocms_gallerij/_start_image.html"
+
+    def render(self, context, instance, placeholder):
+        image = instance.image
+        context.update({
+            'image': image,
+        })
+
+        return context
+
 plugin_pool.register_plugin(GalleryPlugin)
 plugin_pool.register_plugin(StartSliderPlugin)
+plugin_pool.register_plugin(StartImagePlugin)
