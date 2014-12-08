@@ -9,7 +9,7 @@
 {% addtoblock "js" %}<script src="{{ STATIC_URL }}bower_components/jquery/dist/jquery.min.js"></script>{% endaddtoblock "js" %}
 {% addtoblock "js" %}<script type="text/javascript" src="{{ STATIC_URL }}bower_components/slick.js/slick/slick.js"></script>{% endaddtoblock "js" %}
 
-{% addtoblock "js" %}<script src="{{ STATIC_URL }}bower_components/object-fit/dist/polyfill.object-fit.min.js"></script>{% endaddtoblock "js" %}
+{% addtoblock "js" %}<script src="{{ STATIC_URL }}bower_components/object-fit/dist/polyfill.object-fit.js"></script>{% endaddtoblock "js" %}
 {% addtoblock "js" %}<script type="text/javascript">
 
 	objectFit.polyfill({
@@ -22,8 +22,6 @@
 {% addtoblock "js" %}<script type="text/javascript">
 	$(document).ready(function(){
 		$('.image-slider').slick({
-			autoplay: true,
-			lazyLoad: 'ondemand',
 			initialSlide : {{start_slide}}
 		});
 	});
@@ -33,9 +31,9 @@
 	{% for image in image_list %}
 	<div class="single-image">
 		{% if image.image.width >= image.image.height%}
-			<img data-lazy="{% thumbnail image.image 2560x1706 crop="True" upscale="True" %}" class="landscape">
+			<img src="{% thumbnail image.image 2560x1706 crop="True" upscale="True" %}" class="landscape">
 		{% else %}
-			<img data-lazy="{% thumbnail image.image 1706x2560 crop="True" upscale="True" %}" class="portrait">
+			<img src="{% thumbnail image.image 1706x2560 crop="True" upscale="True" %}" class="portrait">
 		{% endif %}
 	</div>
 	{% endfor %}

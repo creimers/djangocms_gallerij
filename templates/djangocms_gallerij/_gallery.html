@@ -4,10 +4,10 @@
 	{% for image in images %}
 	<div class="gallerij-item">
 		<a href="img/{{image.pk}}">
-			{% if image.image.width >= image.image.height%}
-				<img src="{% thumbnail image.image 180x120 crop="True" upscale="True" %}" alt="{{ image.label }}">
+			{% if image.image.width >= image.image.height %}
+				<img src="{% thumbnail image.image 200x143 crop="True" %}" alt="{{ image.label }}" class="gallerij-landscape">
 			{% else %}
-				<img src="{% thumbnail image.image 120x180 crop="True" upscale="True" %}" alt="{{ image.label }}">
+				<img src="{% thumbnail image.image 200x300 crop="True" %}" alt="{{ image.label }}" class="gallerij-portrait">
 			{% endif %}
 		</a>
 	</div>
@@ -25,8 +25,11 @@
 				
 				// options
 				itemSelector: '.gallerij-item',
-				layoutMode: 'fitRows'
-
+				layoutMode: 'masonry',
+				masonry: {
+					columnWidth: 200,
+					gutter: 14
+				}
 			});
 		});
 	});

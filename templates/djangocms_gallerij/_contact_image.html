@@ -1,0 +1,23 @@
+{% load cms_tags sekizai_tags thumbnail staticfiles%}
+
+{% block content %}
+
+{% addtoblock "css" %}<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}djangocms_gallerij/css/polyfill.object-fit.css"/>{% endaddtoblock "css" %}
+
+{% addtoblock "js" %}<script src="{{ STATIC_URL }}bower_components/jquery/dist/jquery.min.js"></script>{% endaddtoblock "js" %}
+
+{% addtoblock "js" %}<script src="{{ STATIC_URL }}djangocms_gallerij/js/polyfill.object-fit.min.js"></script>{% endaddtoblock "js" %}
+{% addtoblock "js" %}<script type="text/javascript">
+
+	objectFit.polyfill({
+		selector: 'landscape', // this can be any CSS selector
+		fittype: 'cover' // either contain, cover, fill or none
+
+	});
+</script>{% endaddtoblock "js" %}
+
+<div class="full-height">
+	<img src="{% thumbnail image.image 800x1200 crop="True" upscale="True" %}" class="landscape">
+</div>
+
+{% endblock %}

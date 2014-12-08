@@ -55,6 +55,23 @@ class StartImagePlugin(CMSPluginBase):
 
         return context
 
+
+class ContactImagePlugin(CMSPluginBase):
+
+    model = StartImage
+    name = _("Contact Image")
+    render_template = "djangocms_gallerij/_contact_image.html"
+
+    def render(self, context, instance, placeholder):
+        image = instance.image
+        context.update({
+            'image': image,
+        })
+
+        return context
+
+
 plugin_pool.register_plugin(GalleryPlugin)
 plugin_pool.register_plugin(StartSliderPlugin)
 plugin_pool.register_plugin(StartImagePlugin)
+plugin_pool.register_plugin(ContactImagePlugin)
