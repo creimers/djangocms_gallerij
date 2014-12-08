@@ -1,28 +1,20 @@
 {% extends CMS_TEMPLATE %}
-{% load cms_tags menu_tags sekizai_tags thumbnail%}
+{% load cms_tags menu_tags sekizai_tags thumbnail staticfiles %}
 
 {% block content %}
 
-{% addtoblock "css" %}<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}bower_components/object-fit/dist/polyfill.object-fit.css"/>{% endaddtoblock "css" %}
 {% addtoblock "css" %}<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}bower_components/slick.js/slick/slick.css"/>{% endaddtoblock "css" %}
+{% addtoblock "css" %}<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}bower_components/font-awesome/css/font-awesome.css"/>{% endaddtoblock "css" %}
 
 {% addtoblock "js" %}<script src="{{ STATIC_URL }}bower_components/jquery/dist/jquery.min.js"></script>{% endaddtoblock "js" %}
 {% addtoblock "js" %}<script type="text/javascript" src="{{ STATIC_URL }}bower_components/slick.js/slick/slick.js"></script>{% endaddtoblock "js" %}
 
-{% addtoblock "js" %}<script src="{{ STATIC_URL }}bower_components/object-fit/dist/polyfill.object-fit.js"></script>{% endaddtoblock "js" %}
-{% addtoblock "js" %}<script type="text/javascript">
-
-	objectFit.polyfill({
-		selector: '.landscape', // this can be any CSS selector
-		fittype: 'cover' // either contain, cover, fill or none
-
-	});
-</script>{% endaddtoblock "js" %}
-
 {% addtoblock "js" %}<script type="text/javascript">
 	$(document).ready(function(){
 		$('.image-slider').slick({
-			initialSlide : {{start_slide}}
+			initialSlide : {{start_slide}},
+			prevArrow: '.previous-arrow',
+			nextArrow: '.next-arrow',
 		});
 	});
 </script>{% endaddtoblock "js" %}
@@ -37,6 +29,14 @@
 		{% endif %}
 	</div>
 	{% endfor %}
+</div>
+
+<div class="previous-arrow">
+	<i class="fa fa-angle-left fa-2x"></i>
+</div>
+
+<div class="next-arrow">
+	<i class="fa fa-angle-right fa-2x"></i>
 </div>
 
 {% endblock %}
