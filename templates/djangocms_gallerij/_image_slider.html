@@ -31,9 +31,9 @@
 	{% for image in image_list %}
 	<div class="single-image">
 		{% if image.image.width >= image.image.height%}
-			<img src="{% thumbnail image.image 2560x1706 crop="True" upscale="True" %}" class="landscape">
+		<div class="a-slide" style="background: url('{% thumbnail image.image 2560x1706 crop="True" upscale="True" %}') no-repeat center center"></div>
 		{% else %}
-			<img src="{% thumbnail image.image 1706x2560 crop="True" upscale="True" %}" class="portrait">
+		<img src="{% thumbnail image.image 1706x2560 crop="True" upscale="True" %}" class="portrait">
 		{% endif %}
 	</div>
 	{% endfor %}
