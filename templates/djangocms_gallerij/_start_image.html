@@ -17,7 +17,7 @@
 </script>{% endaddtoblock "js" %}
 
 <div class="image-slider full-height">
-	<img src="{% thumbnail image.image 2560x1280 crop="True" upscale="True" %}" class="landscape">
+	<div class="a-slide" style="background: url('{% thumbnail image.image 2560x1280 crop="True" upscale="True" %}') no-repeat center center"></div>
 </div>
 
 {% endblock %}
