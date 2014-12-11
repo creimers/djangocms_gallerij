@@ -7,6 +7,7 @@ from django.utils.translation import ugettext as _
 
 from .models import GalleryPluginModel
 from .models import StartImage
+from .models import ContactPage
 
 
 class GalleryPlugin(CMSPluginBase):
@@ -60,7 +61,7 @@ class ContactImagePlugin(CMSPluginBase):
 
     model = StartImage
     name = _("Contact Image")
-    render_template = "djangocms_gallerij/_contact_image.html"
+    render_template = "djangocms_gallerij/_info_image.html"
 
     def render(self, context, instance, placeholder):
         image = instance.image
@@ -71,7 +72,23 @@ class ContactImagePlugin(CMSPluginBase):
         return context
 
 
+class ContactPagePlugin(CMSPluginBase):
+
+    model = ContactPage
+    name = _("Contact Page")
+    render_template = "djangocms_gallerij/_contact_page.html"
+
+    def render(self, context, instance, placeholder):
+        image = instance.background_image
+        text = instance.contact_text
+        context.update({
+            'image': image,
+            'text': text,
+        })
+
+        return context
+
 plugin_pool.register_plugin(GalleryPlugin)
-plugin_pool.register_plugin(StartSliderPlugin)
 plugin_pool.register_plugin(StartImagePlugin)
 plugin_pool.register_plugin(ContactImagePlugin)
+plugin_pool.register_plugin(ContactPagePlugin)

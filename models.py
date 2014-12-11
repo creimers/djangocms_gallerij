@@ -6,6 +6,8 @@ from adminsortable.fields import SortableForeignKey
 
 from filer.fields.image import FilerImageField
 
+from djangocms_text_ckeditor.fields import HTMLField
+
 
 class Gallery(models.Model):
 
@@ -63,3 +65,14 @@ class StartImage(CMSPlugin):
 
     def __unicode__(self):
         return u'%s' % self.image.label
+
+
+class ContactPage(CMSPlugin):
+    background_image = FilerImageField(
+        null=True,
+        blank=False
+    )
+    contact_text = HTMLField(blank=True)
+
+    def __unicode__(self):
+        return u'%s' % self.background_image.label
